@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ConsolidatedStatement">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <TableView fx:id="ctable" prefHeight="625.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="750.0" layoutY="10.0" prefHeight="650.0" prefWidth="116.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="264.0" prefWidth="254.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="50.0" layoutY="20.0" text="Сводная ведомость">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="59.0" text="Факультет " AnchorPane.leftAnchor="15.0" />
+                        <ComboBox fx:id="cb_faculty" layoutX="89.0" layoutY="54.0" onShowing="#cb_faculty_show" prefWidth="150.0" AnchorPane.rightAnchor="15.0" />
+                        <Label layoutX="15.0" layoutY="109.0" text="Группа " AnchorPane.leftAnchor="15.0" />
+                        <ComboBox fx:id="cb_group" layoutX="89.0" layoutY="104.0" prefWidth="150.0" AnchorPane.rightAnchor="15.0" />
+                        <Label layoutX="15.0" layoutY="159.0" text="Семестр " AnchorPane.leftAnchor="15.0" />
+                        <ComboBox fx:id="cb_semestr" layoutX="89.0" layoutY="154.0" prefWidth="150.0" AnchorPane.rightAnchor="15.0" />
+                        <Button fx:id="bt_action" layoutX="65.0" layoutY="208.0" mnemonicParsing="false" text="Сформировать" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
