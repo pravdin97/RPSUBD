@@ -27,7 +27,22 @@ public class ConsolidatedStatement {
     @FXML
     public void cb_faculty_show(){
         cb_faculty.getItems().clear();
-        cb_faculty.getItems().addAll(ConsolidatedStatementDao.GetAllSemestr());
-        System.out.println(cb_faculty.getValue());
+        cb_faculty.getItems().addAll(ConsolidatedStatementDao.GetAllFaculty());
+    }
+
+    @FXML
+    public void cb_group_show(){
+        cb_group.getItems().clear();
+        if (cb_faculty.getValue() == null)
+            return;
+        cb_group.getItems().addAll(ConsolidatedStatementDao.GetGroupByFaculty(cb_faculty.getValue().toString()));
+    }
+
+    @FXML
+    public void cb_semestr_show(){
+        cb_semestr.getItems().clear();
+        if (cb_faculty.getValue() == null || cb_group.getValue() == null)
+            return;
+        cb_semestr.getItems().addAll(ConsolidatedStatementDao.GetAllSemestrs());
     }
 }
