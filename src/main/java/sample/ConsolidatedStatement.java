@@ -61,5 +61,6 @@ public class ConsolidatedStatement {
             return;
         }
         lb_info.setText(ConsolidatedStatementDao.GetCRecordInfo(cb_group.getValue().toString(), cb_semestr.getValue().toString()));
+        ConsolidatedStatementDao.GetICRecords(cb_group.getValue().toString(), cb_semestr.getValue().toString(), 1);
     }
 }

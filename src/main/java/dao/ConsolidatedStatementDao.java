@@ -1,9 +1,12 @@
 package dao;
 
+import entity.ICRecord;
 import utils.DBHelper;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConsolidatedStatementDao {
     static ArrayList<String> GetStringGeneric(ResultSet result, String column) {
@@ -55,5 +58,66 @@ public class ConsolidatedStatementDao {
         } catch (Exception e) {
         }
         return "Ведомости с заданными параметрами не найдены";
+    }
+
+    public static ArrayList<ICRecord> GetICRecords(String group, String semestr, Integer CRecordID) {
+        //КАКОГО ХУЯ ЭТА СУКА НЕ ХОЧЕТ ВОЗВРАЩАТЬ ЗНАЧЕНИЯ??????????????
+        //ЕМУ ПОХУЙ НА ФУНКЦИЮ НА ТИП ПАРАМЕТРОВ ОНА ПРОСТО ВОЗВРАЩАЕТ НИ-НУ-Я
+        ResultSet lines = DBHelper.ExecuteQuery(Queries.GetDataFromCRecord(CRecordID));
+        ArrayList<ICRecord> result = new ArrayList<ICRecord>();
+        Map<Integer, String> subjects = GetSubjects(group, semestr);
+        // Предмет - Рейтинг
+        Map<String, String> ratings = new HashMap<String, String>();
+        Integer ICRecordId, StudentID;
+        String StudentName, StudentSurname;
+        try {
+            while (lines.next()) {
+                ICRecordId = lines.getInt("icrecordid");
+                StudentID = lines.getInt("studentid");
+                StudentName = lines.getString("studentname");
+                StudentSurname = lines.getString("studentsurname");
+                // ИД - Рейтинг
+                Map<Integer, String> data = GetSRatings(ICRecordId);
+                for (int i = 0; i < subjects.size(); i++) {
+                    Object key = subjects.keySet().toArray()[i];
+                    if (data.containsKey(key)) {
+                        ratings.put(subjects.get(key), data.get(key));
+                    } else {
+                        ratings.put(subjects.get(key), "-");
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+    // ID - Рейтинг
+    static Map<Integer, String> GetSRatings(Integer ICRecordID) {
+        ResultSet lines = DBHelper.ExecuteQuery(Queries.GetDataFromICRecord(ICRecordID));
+        Map<Integer, String> ratings = new HashMap<Integer, String>();
+        try {
+            while (lines.next()) {
+                ratings.put(lines.getInt("subjectid"), lines.getString("rating"));
+            }
+        } catch (Exception e) {
+        }
+        return ratings;
+    }
+
+    // ID и Предмет
+    static Map<Integer, String> GetSubjects(String group, String semestr) {
+        String direction = group.split("-")[0];
+        group = group.split("-")[1];
+        ResultSet subj_ = DBHelper.ExecuteQuery(Queries.GetIdSubjectFromERecord(group, direction, semestr));
+        Map<Integer, String> result = new HashMap<Integer, String>();
+        try {
+            while (subj_.next()) {
+                result.put(subj_.getInt(1), subj_.getString(2));
+            }
+        } catch (Exception e) {
+        }
+        return result;
     }
 }
