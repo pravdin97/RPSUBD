@@ -61,15 +61,15 @@ public class ConsolidatedStatementDao {
     }
 
     public static ArrayList<ICRecord> GetICRecords(String group, String semestr, Integer CRecordID) {
-        //КАКОГО ХУЯ ЭТА СУКА НЕ ХОЧЕТ ВОЗВРАЩАТЬ ЗНАЧЕНИЯ??????????????
-        //ЕМУ ПОХУЙ НА ФУНКЦИЮ НА ТИП ПАРАМЕТРОВ ОНА ПРОСТО ВОЗВРАЩАЕТ НИ-НУ-Я
-        ResultSet lines = DBHelper.ExecuteQuery(Queries.GetDataFromCRecord(CRecordID));
         ArrayList<ICRecord> result = new ArrayList<ICRecord>();
         Map<Integer, String> subjects = GetSubjects(group, semestr);
         // Предмет - Рейтинг
-        Map<String, String> ratings = new HashMap<String, String>();
+        Map<String, String> ratings;
         Integer ICRecordId, StudentID;
         String StudentName, StudentSurname;
+
+        ResultSet lines = DBHelper.ExecuteQuery(Queries.GetDataFromCRecord(CRecordID));
+
         try {
             while (lines.next()) {
                 ICRecordId = lines.getInt("icrecordid");
@@ -77,18 +77,20 @@ public class ConsolidatedStatementDao {
                 StudentName = lines.getString("studentname");
                 StudentSurname = lines.getString("studentsurname");
                 // ИД - Рейтинг
-                Map<Integer, String> data = GetSRatings(ICRecordId);
-                for (int i = 0; i < subjects.size(); i++) {
-                    Object key = subjects.keySet().toArray()[i];
-                    if (data.containsKey(key)) {
-                        ratings.put(subjects.get(key), data.get(key));
-                    } else {
-                        ratings.put(subjects.get(key), "-");
-                    }
-                }
-
+                result.add(new ICRecord(ICRecordId, StudentID, StudentName, StudentSurname));
             }
-        } catch (Exception e) {
+        } catch (Exception e) {}
+        for (ICRecord item : result) {
+            ratings = new HashMap<String, String>();
+            Map<Integer, String> data = GetSRatings(item.getID());
+            for (int i = 0; i < subjects.size(); i++) {
+                Object key = subjects.keySet().toArray()[i];
+                if (data.containsKey(key)) {
+                    ratings.put(subjects.get(key), data.get(key));
+                } else {
+                    ratings.put(subjects.get(key), "-");
+                }
+            }
         }
         return result;
     }
