@@ -1,13 +1,18 @@
 package sample;
 
 import dao.ConsolidatedStatementDao;
+import entity.ICRecord;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 
 public class ConsolidatedStatement {
+
     //region Def
     @FXML
     Button bt_action;
@@ -56,11 +61,32 @@ public class ConsolidatedStatement {
 
     @FXML
     public void bt_action_form() {
-        if (cb_faculty.getValue() == null || cb_group.getValue() == null || cb_group == null) {
+        if (cb_faculty.getValue() == null || cb_group.getValue() == null || cb_semestr.getValue() == null) {
             lb_info.setText("Заполните все параметры выбора сводной ведомости");
             return;
         }
-        lb_info.setText(ConsolidatedStatementDao.GetCRecordInfo(cb_group.getValue().toString(), cb_semestr.getValue().toString()));
-        ConsolidatedStatementDao.GetICRecords(cb_group.getValue().toString(), cb_semestr.getValue().toString(), 1);
+        ctable.getColumns().clear();
+        String crecordInfo = ConsolidatedStatementDao.GetCRecordInfo(cb_group.getValue().toString(), cb_semestr.getValue().toString());
+        if (crecordInfo == null) {
+            lb_info.setText("Ведомости с заданными параметрами не найдены");
+            return;
+        }
+
+        lb_info.setText(crecordInfo);
+        Map<Integer, String> subjcts = ConsolidatedStatementDao.GetSubjects(cb_group.getValue().toString(), cb_semestr.getValue().toString());
+        ArrayList<ICRecord> icRecords = ConsolidatedStatementDao.GetICRecords(cb_group.getValue().toString(), cb_semestr.getValue().toString());
+        Collections.sort(icRecords);
+        ctable.setItems(FXCollections.observableArrayList(icRecords));
+        TableColumn<ICRecord, String> tableColumnStudents = new TableColumn<ICRecord, String>("Студент");
+        tableColumnStudents.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getStudent()));
+        ctable.getColumns().add(tableColumnStudents);
+
+        // Проходит по предметам и заносит информацию в колонки
+        for (Integer key : subjcts.keySet()) {
+            String value = subjcts.get(key);
+            TableColumn<ICRecord, String> tableColumn = new TableColumn<ICRecord, String>(value);
+            tableColumn.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().GetRating(key)));
+            ctable.getColumns().add(tableColumn);
+        }
     }
 }
