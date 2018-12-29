@@ -16,7 +16,7 @@ public class ICRecord implements Comparable {
         if (Data.containsKey(key))
             return Data.get(key);
         else
-            return "-";
+            return "0";
     }
 
     public String getStudent() {

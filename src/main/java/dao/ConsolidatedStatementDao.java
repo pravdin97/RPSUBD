@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ConsolidatedStatementDao {
     /// Дженерик - возвращает все данные из колонки в виде листа
-    static ArrayList<String> GetStringGeneric(ResultSet result, String column) {
+    public static ArrayList<String> GetStringGeneric(ResultSet result, String column) {
         ArrayList<String> ret = new ArrayList<String>();
         try {
             while (result.next()) {

@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="235.0" layoutY="14.0" text="Разрешение на пересдачу">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="40.0" layoutY="71.0" text="Факультет" />
-      <Label layoutX="40.0" layoutY="121.0" text="Группа" />
-      <Label layoutX="40.0" layoutY="171.0" text="ФИО Студента" />
-      <Label layoutX="385.0" layoutY="120.0" text="Дисциплина" />
-      <Label layoutX="385.0" layoutY="170.0" text="Преподаватель" />
-      <DatePicker layoutX="503.0" layoutY="65.0" prefHeight="31.0" prefWidth="155.0" />
-      <Label layoutX="388.0" layoutY="70.0" text="Дата" />
-      <TextField layoutX="503.0" layoutY="165.0" prefHeight="31.0" prefWidth="155.0" />
-      <ComboBox layoutX="503.0" layoutY="115.0" prefHeight="31.0" prefWidth="155.0" />
-      <ComboBox layoutX="149.0" layoutY="164.0" prefHeight="31.0" prefWidth="169.0" />
-      <ComboBox layoutX="149.0" layoutY="116.0" prefHeight="31.0" prefWidth="169.0" />
-      <ComboBox layoutX="149.0" layoutY="66.0" prefHeight="31.0" prefWidth="169.0" />
-      <AnchorPane layoutY="229.0" prefHeight="67.0" prefWidth="700.0" style="-fx-background-color: #FFDDDD;" AnchorPane.bottomAnchor="0.0">
-         <children>
-            <TextField layoutX="147.0" layoutY="18.0" prefHeight="31.0" prefWidth="169.0" />
-            <Button layoutX="382.0" layoutY="18.0" mnemonicParsing="false" text="Отправить" />
-            <Label layoutX="37.0" layoutY="23.0" text="Новая оценка">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="338.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Tolerance">
+    <children>
+        <Label layoutX="235.0" layoutY="14.0" text="Разрешение на пересдачу">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="40.0" layoutY="71.0" text="Факультет" />
+        <Label layoutX="40.0" layoutY="121.0" text="Группа" />
+        <Label layoutX="40.0" layoutY="171.0" text="ФИО Студента" />
+        <Label layoutX="385.0" layoutY="120.0" text="Дисциплина" />
+        <Label layoutX="385.0" layoutY="70.0" text="Семестр" />
+        <DatePicker fx:id="dp_date" disable="true" layoutX="500.0" layoutY="164.0" onHiding="#BoxHiding" prefHeight="31.0" prefWidth="155.0" />
+        <Label layoutX="385.0" layoutY="169.0" text="Дата" />
+        <ComboBox fx:id="cb_subject" disable="true" layoutX="503.0" layoutY="115.0" onHiding="#BoxHiding" onShowing="#cb_subject_show" prefHeight="31.0" prefWidth="155.0" />
+        <ComboBox fx:id="cb_fio" layoutX="149.0" layoutY="164.0" onHiding="#BoxHiding" onShowing="#cb_fio_show" prefHeight="31.0" prefWidth="169.0" AnchorPane.leftAnchor="150.0" />
+        <ComboBox fx:id="cb_group" layoutX="149.0" layoutY="116.0" onHiding="#BoxHiding" onShowing="#cb_group_show" prefHeight="31.0" prefWidth="169.0" AnchorPane.leftAnchor="150.0" />
+        <ComboBox fx:id="cb_faculty" layoutX="149.0" layoutY="66.0" onHiding="#BoxHiding" onShowing="#cb_faculty_show" prefHeight="31.0" prefWidth="169.0" AnchorPane.leftAnchor="150.0" />
+        <AnchorPane layoutY="243.0" prefHeight="100.0" prefWidth="700.0" style="-fx-background-color: #FFDDDD;" AnchorPane.bottomAnchor="0.0">
+            <children>
+                <TextField fx:id="tf_new" layoutX="506.0" layoutY="13.0" prefHeight="31.0" prefWidth="155.0" />
+                <Button fx:id="bt_change" disable="true" layoutX="506.0" layoutY="55.0" mnemonicParsing="false" onAction="#bt_change_click" text="Отправить" />
+                <Label layoutX="389.0" layoutY="18.0" text="Новая оценка">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="18.0" text="Старая оценка">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="tf_old" disable="true" editable="false" layoutX="147.0" layoutY="13.0" prefHeight="31.0" prefWidth="169.0" AnchorPane.leftAnchor="150.0">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </TextField>
+                <Label fx:id="lb_info" layoutX="40.0" layoutY="60.0" text="Заполните левую часть полей" textFill="RED">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <ComboBox fx:id="cb_semestr" disable="true" layoutX="503.0" layoutY="66.0" onHiding="#BoxHiding" onShowing="#cb_semestr_show" prefHeight="31.0" prefWidth="155.0" />
+    </children>
 </AnchorPane>

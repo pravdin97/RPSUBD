@@ -46,4 +46,16 @@ public class DBHelper {
         }
         return null;
     }
+
+    public static Integer ExecuteUpdate(String query) {
+        if (state != null) {
+            try {
+                return state.executeUpdate(query);
+            } catch (Exception e) {
+                Logger.getLogger(DBHelper.class.getName()).log(
+                        Level.SEVERE, "Запрос не был выполнен", e);
+            }
+        }
+        return null;
+    }
 }
