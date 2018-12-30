@@ -92,4 +92,24 @@ public class Queries {
                 "(date, erating, id_teacher, id_student, id_subject) " +
                 "VALUES('%s', %s, %s, %s, %s)", sDate, rating, teacherId, studentId, subjectId);
     }
+
+    /// Проверка логина препода
+    public static String CheckLoginTeacher(String login, String password) {
+        return String.format("select * from checkloginteacher('%s', '%s')", login, password);
+    }
+
+    /// Проверка логина работяги
+    public static String CheckLoginWorker(String login, String password) {
+        return String.format("select * from checkloginworker('%s', '%s')", login, password);
+    }
+
+    /// Достать ФИО препода
+    public static String GetLoginTeacher(String login, String password) {
+        return String.format("select surname, name from teacher where teacher.login = '%s' AND teacher.pass = '%s'", login, password);
+    }
+
+    /// Достать ФИО работяги
+    public static String GetLoginWorker(String login, String password) {
+        return String.format("select surname, name from worker where worker.login = '%s' AND worker.pass = '%s'", login, password);
+    }
 }

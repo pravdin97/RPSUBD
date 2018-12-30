@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
+            prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Login">
+    <children>
+        <fx:define>
+            <ToggleGroup fx:id="tgroup"/>
+        </fx:define>
+        <AnchorPane prefHeight="91.0" prefWidth="500.0" style="-fx-background-color: ADADAD;"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Label fx:id="lb_info" alignment="CENTER" layoutX="19.0" layoutY="32.0" prefHeight="28.0"
+                       prefWidth="463.0" text="Войти" textAlignment="CENTER">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <TextField fx:id="tf_login" layoutX="194.0" layoutY="109.0" AnchorPane.rightAnchor="119.0"/>
+        <PasswordField fx:id="tf_pass" layoutX="194.0" layoutY="164.0" AnchorPane.rightAnchor="119.0"/>
+        <Label layoutX="121.0" layoutY="169.0" text="Пароль" AnchorPane.leftAnchor="121.0"/>
+        <Label layoutX="121.0" layoutY="114.0" text="Логин" AnchorPane.leftAnchor="121.0"/>
+        <Button layoutX="195.0" layoutY="253.0" mnemonicParsing="false" onAction="#bt_tryLogin_click" prefHeight="31.0"
+                prefWidth="111.0" text="Войти"/>
+        <Label fx:id="lb_studentLogin" layoutX="183.0" layoutY="292.0" onMouseClicked="#lb_studentLogin_click"
+               text="Войти как студент" textFill="#014bb2" underline="true">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Label>
+        <RadioButton fx:id="rb_worker" layoutX="264.0" layoutY="217.0" mnemonicParsing="false"
+                     text="Я работник деканата" selected="false" toggleGroup="$tgroup"/>
+        <RadioButton fx:id="rb_teacher" layoutX="90.0" layoutY="217.0" mnemonicParsing="false" text="Я Преподаватель"
+                     toggleGroup="$tgroup" selected="true"/>
+    </children>
+</AnchorPane>
