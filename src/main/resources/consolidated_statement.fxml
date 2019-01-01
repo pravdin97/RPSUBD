@@ -12,7 +12,11 @@
       </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="50.0">
             <children>
-                <TableView fx:id="ctable" layoutY="41.0" prefHeight="589.0" prefWidth="730.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <TableView fx:id="ctable" layoutY="41.0" prefHeight="589.0" prefWidth="730.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <placeholder>
+                        <Label text="Вы не выбрали ведомость или она не существует"/>
+                    </placeholder>
+                </TableView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="750.0" layoutY="10.0" prefHeight="650.0" prefWidth="116.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

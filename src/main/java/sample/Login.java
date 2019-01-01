@@ -65,8 +65,9 @@ public class Login {
     }
 
     @FXML
-    public void lb_studentLogin_click() {
+    public void lb_studentLogin_click() throws Exception {
         post = UserPost.STUDENT;
+        ShowWindow(FXMLLoader.load(getClass().getResource("/schedule.fxml")), "Расписание экзаменов");
         ((Stage) lb_info.getScene().getWindow()).close();
     }
 

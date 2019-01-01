@@ -112,4 +112,16 @@ public class Queries {
     public static String GetLoginWorker(String login, String password) {
         return String.format("select surname, name from worker where worker.login = '%s' AND worker.pass = '%s'", login, password);
     }
+
+    /// Возвращает расписание экзаменов данной группы
+    public static String GetSchedule(String direction, String group) {
+        return String.format("SELECT ischedule.id, subject.title, ischedule.room, ischedule.date, teacher.surname || ' ' ||teacher.name || ' ' || teacher.midname as teacher FROM ischedule, schedule, subject, teacher, groupp, direction WHERE " +
+                "ischedule.id_schedule = schedule.id AND " +
+                "schedule.id_group = groupp.id AND " +
+                "ischedule.id_subject = subject.id AND " +
+                "ischedule.id_teacher = teacher.id AND " +
+                "groupp.id_direction = direction.id AND " +
+                "direction.title = '%s' AND " +
+                "groupp.number = '%s'", direction, group);
+    }
 }
