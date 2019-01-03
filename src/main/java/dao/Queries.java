@@ -124,4 +124,35 @@ public class Queries {
                 "direction.title = '%s' AND " +
                 "groupp.number = '%s'", direction, group);
     }
+
+    //Возвращает все записи экзаменационной ведомости
+    public static String GetAllExamPaperItems(String subject, String direction, String group) {
+        return "select ierecord.id, erecord.id_student, ierecord.id_erecord, student.surname, student.name, ierecord.srating, ierecord.erating, ierecord.trating \n" +
+                "from ierecord, erecord, groupp, direction, subject, student\n" +
+                "where ierecord.id_student = student.id AND\n" +
+                "ierecord.id_erecord = erecord.id AND\n" +
+                "erecord.id_group = groupp.id AND\n" +
+                "groupp.id_direction = direction.id AND\n" +
+                "erecord.id_subject = subject.id AND\n" +
+                "subject.title = '" + subject + "' AND\n" +
+                "direction.title = ' " + direction + "' AND\n" +
+                "groupp.number = '" + group + "'\n";
+    }
+
+    public static String GetExamPaperInfo(String subject, String direction, String group) {
+        return "select erecord.id, iscompleted, date, subject.title as subject, direction.title as direction, groupp.number as group, teacher.name as teacherName, teacher.surname as teacherSurname, worker.name as workerName, worker.surname as workerSurname\n" +
+                "from erecord, subject, direction, groupp, teacher, worker\n" +
+                "where erecord.id_subject = subject.id AND\n" +
+                "erecord.id_group = groupp.id AND\n" +
+                "groupp.id_direction = direction.id AND\n" +
+                "erecord.id_teacher = teacher.id AND\n" +
+                "erecord.id_worker = worker.id AND\n" +
+                "subject.title = '" + subject + "' AND\n" +
+                "direction.title = ' " + direction + "' AND\n" +
+                "groupp.number = '" + group + "'\n";
+    }
+
+    public static void CreateNewExamPaper() {
+
+    }
 }
