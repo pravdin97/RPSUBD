@@ -12,6 +12,20 @@ public class Queries {
                 "direction.id = groupp.id_direction and direction.id_faculty = faculty.id and faculty.title = '" + faculty + "'";
     }
 
+    // Получить все направления
+    public static String GetAllDirections(String faculty) {
+        return "select direction.title from direction, faculty where " +
+                "direction.id_faculty = faculty.id and faculty.title = '" + faculty + "'";
+    }
+
+    //
+    public static String GetFacultyAndDirectionWithNumber(String direction) {
+        return String.format("select faculty.title, direction.title, groupp.number from direction, faculty, groupp where " +
+                "direction.title = '%s' and " +
+                "faculty.id = direction.id_faculty and "+
+                "direction.id = groupp.id_direction", direction);
+    }
+
     /// Получить ИД сводной ведомости + ее составителя и дату ее создания заданной группы в данном семестре
     public static String GetIdDateWorkDateFromCRecord(String group, String direction, String semestr) {
         return String.format("select crecord.id, (worker.surname || ' ' || worker.name) as work, date from crecord, groupp, direction,worker,semestr where \n" +

@@ -21,7 +21,7 @@ public class ConsolidatedStatementDao {
         return ret;
     }
 
-    /// Возвращает список факультетов
+    // Возвращает список факультетов
     public static ArrayList<String> GetAllFaculty() {
         ResultSet result = DBHelper.ExecuteQuery(Queries.GET_TITLE_FROM_FACULTY);
         return GetStringGeneric(result, "title");

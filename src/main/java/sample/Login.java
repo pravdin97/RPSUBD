@@ -43,7 +43,7 @@ public class Login {
             if (CheckLogin(tf_login.getText(), tf_pass.getText(), UserPost.WORKER)) {
                 String fio = GetFIO(tf_login.getText(), tf_pass.getText(), UserPost.WORKER);
                 post = UserPost.WORKER;
-                ShowWindow(FXMLLoader.load(getClass().getResource("/tolerance.fxml")), fio + ": Разрешение");
+                ShowWindow(FXMLLoader.load(getClass().getResource("/worker_department.fxml")), fio + ": Работник деканата");
                 ((Stage) lb_info.getScene().getWindow()).close();
                 return;
             } else {
