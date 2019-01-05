@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
    <children>
       <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="600.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="335.0">
         <tabs>
           <Tab fx:id="tp_record" text="Ведомости">
             <content>
@@ -27,8 +27,8 @@
                             <TableColumn fx:id="id_number" minWidth="0.0" prefWidth="203.0" text="Номер группы" />
                           </columns>
                         </TableView>
-                        <Button fx:id="bt_add_group" layoutX="185.0" layoutY="954.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="243.0" text="Добавить группу" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="478.0" AnchorPane.topAnchor="954.0" />
-                        <Button fx:id="bt_delete_group" layoutX="478.0" layoutY="955.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="243.0" text="Удалить группу" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="478.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="955.0" />
+                        <Button fx:id="bt_add_group" layoutX="508.0" layoutY="480.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить группу" AnchorPane.bottomAnchor="27.0" />
+                        <Button fx:id="bt_delete_group" layoutX="159.0" layoutY="480.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Удалить группу" AnchorPane.bottomAnchor="27.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -43,8 +43,8 @@
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button fx:id="btn_add_student" layoutX="140.0" layoutY="972.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="243.0" text="Добавить студента" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="478.0" AnchorPane.topAnchor="955.0" />
-                        <Button fx:id="btn_delete_student" layoutX="453.0" layoutY="954.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="243.0" text="Удалить студента" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="478.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="955.0" />
+                        <Button fx:id="btn_add_student" layoutX="508.0" layoutY="480.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить студента" AnchorPane.bottomAnchor="27.0" />
+                        <Button fx:id="btn_delete_student" layoutX="159.0" layoutY="480.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="243.0" text="Удалить студента" AnchorPane.bottomAnchor="27.0" />
                      </children>
                   </AnchorPane>
               </content>
