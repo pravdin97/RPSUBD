@@ -6,10 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
+<AnchorPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
    <children>
-      <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="1080.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="906.0" AnchorPane.topAnchor="0.0" />
-      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="1080.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE">
+      <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="600.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tp_record" text="Ведомости">
             <content>

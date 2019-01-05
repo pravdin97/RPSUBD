@@ -88,7 +88,7 @@ public class WorkerDepartment implements Initializable {
 
         try {
             TreeItem<String> item = treev_navigation.getSelectionModel().getSelectedItem();
-            if (item.getParent().getParent() != null) {
+            if (item.getParent() != null && item.getParent().getParent() == null) {
                 System.out.println(item.getValue());
                 // Открыть для каждого направления все группы
                 tp_navigation.getSelectionModel().select(tp_group);

@@ -19,11 +19,11 @@ public class Queries {
     }
 
     //
-    public static String GetFacultyAndDirectionWithNumber(String direction) {
+    public static String GetFacultyAndDirectionWithNumber(String faculty) {
         return String.format("select faculty.title, direction.title, groupp.number from direction, faculty, groupp where " +
-                "direction.title = '%s' and " +
                 "faculty.id = direction.id_faculty and "+
-                "direction.id = groupp.id_direction", direction);
+                "direction.id = groupp.id_direction and " +
+                "faculty.title = '%s'", faculty);
     }
 
     /// Получить ИД сводной ведомости + ее составителя и дату ее создания заданной группы в данном семестре

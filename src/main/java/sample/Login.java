@@ -47,7 +47,7 @@ public class Login {
                 ((Stage) lb_info.getScene().getWindow()).close();
                 return;
             } else {
-                lb_info.setText("Вы неверные данные для входа");
+                lb_info.setText("Вы ввели неверные данные для входа");
                 return;
             }
         }
@@ -59,7 +59,7 @@ public class Login {
                 ((Stage) lb_info.getScene().getWindow()).close();
                 return;
             } else {
-                lb_info.setText("Вы неверные данные для входа");
+                lb_info.setText("Вы ввели неверные данные для входа");
                 return;
             }
     }

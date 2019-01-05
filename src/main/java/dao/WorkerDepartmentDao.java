@@ -23,9 +23,9 @@ public class WorkerDepartmentDao {
     }
 
     //
-    public static ArrayList<GroupWorkerDepartment> GetDirectionWithNumber(String direction) {
+    public static ArrayList<GroupWorkerDepartment> GetDirectionWithNumber(String faculty) {
 
-        ResultSet res = DBHelper.ExecuteQuery(Queries.GetFacultyAndDirectionWithNumber(direction));
+        ResultSet res = DBHelper.ExecuteQuery(Queries.GetFacultyAndDirectionWithNumber(faculty));
         ArrayList<GroupWorkerDepartment> result = new ArrayList<>();
         try {
             while (res.next()) {
