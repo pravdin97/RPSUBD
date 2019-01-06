@@ -1,7 +1,11 @@
 package sample;
 
+import dao.CRecordDao;
+import dao.ERecordDao;
 import dao.StudentDao;
 import dao.WorkerDepartmentDao;
+import entity.CRecord;
+import entity.ERecord;
 import entity.GroupWorkerDepartment;
 import entity.Student;
 import javafx.collections.FXCollections;
@@ -15,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class WorkerDepartment implements Initializable {
@@ -31,6 +36,8 @@ public class WorkerDepartment implements Initializable {
     private TableColumn<GroupWorkerDepartment, String> id_direction;
     @FXML
     private TableColumn<GroupWorkerDepartment, String> id_number;
+
+    // TODO: Сделать добавление группы
     @FXML
     private Button bt_add_group;
     @FXML
@@ -50,6 +57,8 @@ public class WorkerDepartment implements Initializable {
     private TableColumn<Student, String> id_surname;
     @FXML
     private TableColumn<Student, String> id_midname;
+
+    // TODO: Сделать добавление студента
     @FXML
     private Button btn_add_student;
     @FXML
@@ -60,6 +69,55 @@ public class WorkerDepartment implements Initializable {
     // Таблица "Ведомости"
     @FXML
     private Tab tp_record;
+
+    // Сводная
+    @FXML
+    private Tab tp_crecord;
+    @FXML
+    private TableView<CRecord> tv_crecord;
+    @FXML
+    private TableColumn<CRecord, Date> id_data_crecord;
+    @FXML
+    private TableColumn<CRecord, String> id_group_crecord;
+    @FXML
+    private TableColumn<CRecord, String> id_worker_crecord;
+    @FXML
+    private TableColumn<CRecord, Integer> id_semestr_crecord;
+
+    private ObservableList<CRecord> crecordData = FXCollections.observableArrayList();
+
+    // TODO: Сделать добавление сводной ведомости
+    @FXML
+    private Button bt_add_crecord;
+    @FXML
+    private Button bt_delete_crecord;
+
+    // TODO: Экзаменационная
+    // Сводная
+    @FXML
+    private Tab tp_erecord;
+    @FXML
+    private TableView<ERecord> tv_erecord;
+    @FXML
+    private TableColumn<ERecord, Date> id_data_erecord;
+    @FXML
+    private TableColumn<ERecord, String> id_group_erecord;
+    @FXML
+    private TableColumn<ERecord, String> id_worker_erecord;
+    @FXML
+    private TableColumn<ERecord, String> id_teacher_erecord;
+    @FXML
+    private TableColumn<ERecord, String> id_subject_erecord;
+    @FXML
+    private TableColumn<ERecord, Boolean> id_status_erecord;
+
+    private ObservableList<ERecord> erecordData = FXCollections.observableArrayList();
+
+    // TODO: Сделать добавление экзаменационной ведомости ведомости
+    @FXML
+    private Button bt_add_erecord;
+    @FXML
+    private Button bt_delete_erecord;
 
 
 
@@ -83,6 +141,7 @@ public class WorkerDepartment implements Initializable {
         for (String faculty: facultyTreeItems) {
             TreeItem<String> facultyTreeNode = new TreeItem<>(faculty);
 
+
             ArrayList<String> directionTreeItems = WorkerDepartmentDao.GetAllDirections(faculty);
             for (String direction: directionTreeItems) {
                 TreeItem<String> directionTreeNode = new TreeItem<>(direction);
@@ -93,6 +152,8 @@ public class WorkerDepartment implements Initializable {
     }
 
 
+
+
     // Обработка нажатия клавиши мышки для определения направления
     @FXML
     public void clickMouse(MouseEvent mouseEvent) {
@@ -101,8 +162,17 @@ public class WorkerDepartment implements Initializable {
             TreeItem<String> item = treev_navigation.getSelectionModel().getSelectedItem();
             if (item.getParent() != null && item.getParent().getParent() == null) {
                 System.out.println(item.getValue());
-                // Открыть для каждого направления все группы
-                tp_navigation.getSelectionModel().select(tp_group);
+
+                tp_navigation.getSelectionModel().select(tp_record);
+
+                getAllCRecordFromFaculty(item.getValue());
+                setTypeAndValueForCRecord();
+                tv_crecord.setItems(crecordData);
+
+                getAllERecordFromFaculty(item.getValue());
+                setTypeAndValueForERecord();
+                tv_erecord.setItems(erecordData);
+
                 getInfoAboutDirection(item.getValue());
                 setTypeAndValueForGroup();
                 tv_group.setItems(groupDepartmentData);
@@ -110,6 +180,10 @@ public class WorkerDepartment implements Initializable {
                 getInfoAboutAllStudentsFromFaculty(item.getValue());
                 setTypeAndValueForStudent();
                 tv_student.setItems(studentData);
+
+
+
+
             } else {
                 System.out.println(item.getValue());
                 getInfoAboutAllStudentFromDirection(item.getValue());
@@ -156,12 +230,48 @@ public class WorkerDepartment implements Initializable {
 
 
     // Вывод в таблицу всех студентов из направления
-    private  void getInfoAboutAllStudentFromDirection(String direction) throws SQLException {
+    private void getInfoAboutAllStudentFromDirection(String direction) throws SQLException {
         tv_student.getItems().clear();
         ArrayList<Student> data = StudentDao.GetAllStudentFromDirectionForTable(direction);
         for (Student item: data) {
             studentData.add(new Student(item.getSurname(), item.getName(), item.getMidname()));
         }
+    }
+
+    // Вывод в таблицу всех сводных ведомостей для данного факультета
+    private void getAllCRecordFromFaculty(String faculty) throws SQLException {
+        tv_crecord.getItems().clear();
+        ArrayList<CRecord> data = CRecordDao.getAllCRecordForFaculty(faculty);
+        for (CRecord item: data) {
+            crecordData.add(new CRecord(item.getDate(), item.getGroup(), item.getWorker(), item.getSemestr()));
+        }
+    }
+
+    // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"
+    private void setTypeAndValueForCRecord() {
+        id_data_crecord.setCellValueFactory(new PropertyValueFactory<CRecord, Date>("date"));
+        id_group_crecord.setCellValueFactory(new PropertyValueFactory<CRecord, String>("group"));
+        id_worker_crecord.setCellValueFactory(new PropertyValueFactory<CRecord, String>("worker"));
+        id_semestr_crecord.setCellValueFactory(new PropertyValueFactory<CRecord, Integer>("semestr"));
+    }
+
+    // Вывод в таблицу всех экзаменнационных ведомостей для данного факультета
+    private void getAllERecordFromFaculty(String faculty) {
+        tv_erecord.getItems().clear();
+        ArrayList<ERecord> data = ERecordDao.getAllERecordForFaculty(faculty);
+        for (ERecord item: data) {
+            erecordData.add(new ERecord(item.getStatus(), item.getDate(), item.getGroup(), item.getWorker(), item.getTeacher(), item.getSubject()));
+        }
+    }
+
+    // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"
+    private void setTypeAndValueForERecord() {
+        id_data_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, Date>("date"));
+        id_group_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, String>("group"));
+        id_worker_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, String>("worker"));
+        id_teacher_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, String>("teacher"));
+        id_subject_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, String>("subject"));
+        id_status_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, Boolean>("status"));
     }
 
 

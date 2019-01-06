@@ -9,18 +9,62 @@
 <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
    <children>
       <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="600.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="335.0">
+      <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="903.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="335.0">
         <tabs>
           <Tab fx:id="tp_record" text="Ведомости">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane fx:id="tp_navigation_record" layoutX="-2.0" prefHeight="568.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab fx:id="tp_crecord" text="Сводная">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="tv_crecord" prefHeight="440.0" prefWidth="903.0">
+                                            <columns>
+                                              <TableColumn fx:id="id_data_crecord" prefWidth="206.0" text="Дата заполнения" />
+                                              <TableColumn fx:id="id_group_crecord" prefWidth="245.0" text="Группа" />
+                                                <TableColumn fx:id="id_worker_crecord" prefWidth="289.0" text="Кем заполнена" />
+                                                <TableColumn fx:id="id_semestr_crecord" prefWidth="165.0" text="Семестр" />
+                                            </columns>
+                                          </TableView>
+                                          <Button fx:id="bt_add_crecord" layoutX="508.0" layoutY="490.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить ведомость" AnchorPane.bottomAnchor="27.0" />
+                                          <Button fx:id="bt_delete_crecord" layoutX="159.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Удалить ведомость" AnchorPane.bottomAnchor="27.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab fx:id="tp_erecord" text="Экзаменационная">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="tv_erecord" prefHeight="440.0" prefWidth="903.0">
+                                             <columns>
+                                                <TableColumn fx:id="id_data_erecord" prefWidth="141.0" text="Дата заполнения" />
+                                                <TableColumn fx:id="id_group_erecord" prefWidth="146.0" text="Группа" />
+                                                <TableColumn fx:id="id_worker_erecord" prefWidth="145.0" text="Кем заполнена" />
+                                                <TableColumn fx:id="id_teacher_erecord" minWidth="0.0" prefWidth="153.0" text="Преподаватель" />
+                                                <TableColumn fx:id="id_subject_erecord" prefWidth="176.0" text="Предмет" />
+                                                <TableColumn fx:id="id_status_erecord" prefWidth="140.0" text="Статус" />
+                                             </columns>
+                                          </TableView>
+                                          <Button fx:id="bt_delete_erecord" layoutX="159.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Удалить ведомость" AnchorPane.bottomAnchor="27.0" />
+                                          <Button fx:id="bt_add_erecord" layoutX="508.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить ведомость" AnchorPane.bottomAnchor="27.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="tp_group" text="Группы">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="163.0" prefWidth="906.0">
                      <children>
-                        <TableView fx:id="tv_group" prefHeight="442.0" prefWidth="906.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tv_group" prefHeight="442.0" prefWidth="903.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="id_faculty" prefWidth="324.0" text="Факультет" />
                             <TableColumn fx:id="id_direction" minWidth="0.0" prefWidth="378.0" text="Направление" />

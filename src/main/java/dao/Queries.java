@@ -43,6 +43,46 @@ public class Queries {
                 "faculty.title = '%s'", faculty);
     }
 
+    // Получить все записи сводной ведомости для факультета
+    public static String getAllFromCRecord(String faculty) {
+        return String.format("select date, " +
+                "(direction.title || ' ' || groupp.number) as group_name, \n" +
+                "(worker.surname || ' ' || worker.name || ' ' || worker.midname) as worker_info,\n" +
+                "semestr.number from\n" +
+                "crecord, worker, semestr, groupp, direction, faculty\n" +
+                "where\n" +
+                "direction.id_faculty = faculty.id and\n" +
+                "groupp.id_direction = direction.id and\n" +
+                "crecord.id_group = groupp.id and\n" +
+                "crecord.id_semestr = semestr.id and\n" +
+                "crecord.id_worker = worker.id and\n" +
+                "faculty.title = '%s'" +
+                "order by date", faculty);
+    }
+
+    // Получить все записи экзаменнационной ведомости для факультета
+    public static String getAllFromERecord(String faculty) {
+        return String.format("select \tdate, \n" +
+                "\t\t(direction.title || ' ' || groupp.number) as group_name, \n" +
+                "\t\t(worker.surname || ' ' || worker.name || ' ' || worker.midname) as worker_info,\n" +
+                "\t\t(teacher.surname || ' ' || teacher.name || ' ' || teacher.midname) as teacher_info,\n" +
+                "\t\tsubject.title as subject_name,\n" +
+                "\t\terecord.iscompleted as status \n" +
+                "\t\t\n" +
+                "\t\tfrom\n" +
+                "\t\terecord, worker, teacher, groupp, direction, faculty, subject\n" +
+                "\t\t\n" +
+                "\t\twhere\n" +
+                "\t\tdirection.id_faculty = faculty.id and\n" +
+                "\t\tgroupp.id_direction = direction.id and\n" +
+                "\t\terecord.id_group = groupp.id and\n" +
+                "\t\terecord.id_worker = worker.id and\n" +
+                "\t\terecord.id_subject = subject.id and\n" +
+                "\t\terecord.id_teacher = teacher.id and\n" +
+                "\t\tfaculty.title = '%s'\n" +
+                "\t\torder by date", faculty);
+    }
+
     /// Получить ИД сводной ведомости + ее составителя и дату ее создания заданной группы в данном семестре
     public static String GetIdDateWorkDateFromCRecord(String group, String direction, String semestr) {
         return String.format("select crecord.id, (worker.surname || ' ' || worker.name) as work, date from crecord, groupp, direction,worker,semestr where \n" +

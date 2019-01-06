@@ -43,7 +43,7 @@ public class Login {
             if (CheckLogin(tf_login.getText(), tf_pass.getText(), UserPost.WORKER)) {
                 String fio = GetFIO(tf_login.getText(), tf_pass.getText(), UserPost.WORKER);
                 post = UserPost.WORKER;
-                ShowWindow(FXMLLoader.load(getClass().getResource("/worker_department.fxml")), fio + ": Работник деканата");
+                ShowWindow(FXMLLoader.load(getClass().getResource("/worker_department.fxml")), fio + ": Работник деканата",  1240.0, 600.0);
                 ((Stage) lb_info.getScene().getWindow()).close();
                 return;
             } else {
@@ -75,6 +75,15 @@ public class Login {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    void ShowWindow(Parent root, String title, double width, double height) {
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.setMinWidth(width);
+        stage.setMinHeight(height);
         stage.show();
     }
 }

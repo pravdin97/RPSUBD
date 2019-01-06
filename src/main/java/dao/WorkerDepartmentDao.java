@@ -5,6 +5,7 @@ import entity.ScheduleItem;
 import utils.DBHelper;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static dao.ConsolidatedStatementDao.GetStringGeneric;
@@ -22,6 +23,7 @@ public class WorkerDepartmentDao {
         return GetStringGeneric(result, "title");
     }
 
+
     // Возвращает результаты для таблицы групы
     public static ArrayList<GroupWorkerDepartment> GetDirectionWithNumber(String faculty) {
 
@@ -34,7 +36,7 @@ public class WorkerDepartmentDao {
                         res.getString(2),
                         res.getString(3)));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
         return result;
