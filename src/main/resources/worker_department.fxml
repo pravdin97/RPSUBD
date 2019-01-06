@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
    <children>
       <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="600.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <TabPane fx:id="tp_navigation" layoutX="335.0" prefHeight="600.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="335.0">
@@ -20,7 +20,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="163.0" prefWidth="906.0">
                      <children>
-                        <TableView fx:id="tv_group" prefHeight="923.0" prefWidth="906.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tv_group" prefHeight="442.0" prefWidth="906.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="id_faculty" prefWidth="324.0" text="Факультет" />
                             <TableColumn fx:id="id_direction" minWidth="0.0" prefWidth="378.0" text="Направление" />
