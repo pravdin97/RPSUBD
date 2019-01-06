@@ -22,7 +22,7 @@ public class WorkerDepartmentDao {
         return GetStringGeneric(result, "title");
     }
 
-    //
+    // Возвращает результаты для таблицы групы
     public static ArrayList<GroupWorkerDepartment> GetDirectionWithNumber(String faculty) {
 
         ResultSet res = DBHelper.ExecuteQuery(Queries.GetFacultyAndDirectionWithNumber(faculty));

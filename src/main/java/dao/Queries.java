@@ -18,7 +18,24 @@ public class Queries {
                 "direction.id_faculty = faculty.id and faculty.title = '" + faculty + "'";
     }
 
-    //
+    // Получить всех студентов с факультета
+    public static String GetAllStudentsFromFaculty(String faculty) {
+        return String.format("select * from student, faculty, direction, groupp where\n" +
+                "student.id_group = groupp.id and\n" +
+                "groupp.id_direction = direction.id and\n" +
+                "faculty.id = direction.id_faculty and\n" +
+                "faculty.title = '%s'", faculty);
+    }
+
+    // Получить всех студентов с напрвления
+    public static String GetAllStudentsFromDirection(String direction) {
+        return String.format("select * from student, groupp, direction where\n" +
+                "student.id_group = groupp.id and\n" +
+                "groupp.id_direction = direction.id and\n" +
+                "direction.title = '%s'", direction);
+    }
+
+    // Получить напрваление с номером(группу) из факультета
     public static String GetFacultyAndDirectionWithNumber(String faculty) {
         return String.format("select faculty.title, direction.title, groupp.number from direction, faculty, groupp where " +
                 "faculty.id = direction.id_faculty and "+

@@ -39,8 +39,9 @@
                      <children>
                         <TableView fx:id="tv_student" prefHeight="923.0" prefWidth="906.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="id_surname" prefWidth="291.0" text="Фамилия" />
+                              <TableColumn fx:id="id_name" prefWidth="260.0" text="Имя" />
+                              <TableColumn fx:id="id_midname" prefWidth="354.0" text="Отчество" />
                            </columns>
                         </TableView>
                         <Button fx:id="btn_add_student" layoutX="508.0" layoutY="480.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить студента" AnchorPane.bottomAnchor="27.0" />
