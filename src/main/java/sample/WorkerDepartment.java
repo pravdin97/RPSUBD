@@ -8,14 +8,20 @@ import entity.CRecord;
 import entity.ERecord;
 import entity.GroupWorkerDepartment;
 import entity.Student;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -274,5 +280,23 @@ public class WorkerDepartment implements Initializable {
         id_status_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, Boolean>("status"));
     }
 
+    @FXML
+    public void getConsolidatedStatementContent() {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/consolidate2.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ConsolidatedStatementContent controller = loader.getController();
+        controller.setValues("", "", "");
+
+
+        Stage stage = new Stage();
+        stage.setTitle("Сводная ведомость");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
