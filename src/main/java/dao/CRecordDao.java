@@ -27,7 +27,4 @@ public class CRecordDao {
         }
         return result;
     }
-
-
-
 }
