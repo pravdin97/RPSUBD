@@ -29,7 +29,7 @@
                                 <TableColumn prefWidth="165.0" text="Семестр" fx:id="id_semestr_crecord" />
                               </columns>
                             </TableView>
-                            <Button fx:id="bt_add_crecord" layoutX="508.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить ведомость" AnchorPane.bottomAnchor="27.0" />
+                            <Button fx:id="bt_add_crecord" layoutX="508.0" mnemonicParsing="false" onAction="#add_crecord" prefHeight="60.0" prefWidth="240.0" text="Добавить ведомость" AnchorPane.bottomAnchor="27.0" />
                             <Button fx:id="bt_delete_crecord" layoutX="159.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Удалить ведомость" AnchorPane.bottomAnchor="27.0" />
                           </children>
                         </AnchorPane>

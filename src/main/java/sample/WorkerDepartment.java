@@ -299,4 +299,20 @@ public class WorkerDepartment implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    @FXML
+    public void add_crecord() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/crecord.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage stage = new Stage();
+        stage.setTitle("Сводная ведомость");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
