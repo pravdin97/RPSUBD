@@ -1,5 +1,7 @@
 package sample;
 
+import dao.LoginDao;
+import entity.CurrentUser;
 import entity.UserPost;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.time.LocalDate;
 
 import static dao.LoginDao.CheckLogin;
 import static dao.LoginDao.GetFIO;
@@ -36,6 +41,7 @@ public class Login {
     ToggleGroup tgroup;
     //endregion
 
+    private CurrentUser currentUser;
 
     @FXML
     public void bt_tryLogin_click() throws Exception {
@@ -43,9 +49,13 @@ public class Login {
             if (CheckLogin(tf_login.getText(), tf_pass.getText(), UserPost.WORKER)) {
                 String fio = GetFIO(tf_login.getText(), tf_pass.getText(), UserPost.WORKER);
                 post = UserPost.WORKER;
-                ShowWindow(FXMLLoader.load(getClass().getResource("/worker_department.fxml")), fio + ": Работник деканата",  1240.0, 600.0);
+
+                currentUser = LoginDao.getCurrentUser(tf_login.getText(), tf_pass.getText(), UserPost.WORKER);
+
+
+                ShowWindowWithSetParameters("/worker_department.fxml");
+//                ShowWindow(FXMLLoader.load(getClass().getResource("/worker_department.fxml")), fio + ": Работник деканата",  1240.0, 600.0);
                 ((Stage) lb_info.getScene().getWindow()).close();
-                return;
             } else {
                 lb_info.setText("Вы ввели неверные данные для входа");
                 return;
@@ -55,9 +65,13 @@ public class Login {
             if (CheckLogin(tf_login.getText(), tf_pass.getText(), UserPost.TEACHER)) {
                 String fio = GetFIO(tf_login.getText(), tf_pass.getText(), UserPost.TEACHER);
                 post = UserPost.TEACHER;
+
+                currentUser = LoginDao.getCurrentUser(tf_login.getText(), tf_pass.getText(), UserPost.TEACHER);
+
                 ShowWindow(FXMLLoader.load(getClass().getResource("/consolidated_statement.fxml")), fio + ": Сводная ведомость");
+
+
                 ((Stage) lb_info.getScene().getWindow()).close();
-                return;
             } else {
                 lb_info.setText("Вы ввели неверные данные для входа");
                 return;
@@ -84,6 +98,29 @@ public class Login {
         stage.setScene(new Scene(root));
         stage.setMinWidth(width);
         stage.setMinHeight(height);
+        stage.show();
+    }
+
+
+    void ShowWindowWithSetParameters(String fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        WorkerDepartment controller = loader.getController();
+
+        try {
+            controller.setUser(currentUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Stage stage = new Stage();
+        stage.setTitle("Сводная ведомость");
+        stage.setScene(new Scene(root));
         stage.show();
     }
 }

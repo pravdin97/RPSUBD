@@ -4,10 +4,7 @@ import dao.CRecordDao;
 import dao.ERecordDao;
 import dao.StudentDao;
 import dao.WorkerDepartmentDao;
-import entity.CRecord;
-import entity.ERecord;
-import entity.GroupWorkerDepartment;
-import entity.Student;
+import entity.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -134,6 +131,10 @@ public class WorkerDepartment implements Initializable {
     // Боковая древовидная навигация
     @FXML
     private TreeView<String> treev_navigation;
+
+
+
+    private CurrentUser currentUser;
 
     // Дерево навигации
     @Override
@@ -307,9 +308,16 @@ public class WorkerDepartment implements Initializable {
             e.printStackTrace();
         }
 
+        NewCRecord newCRecordController = loader.getController();
+        newCRecordController.setUser(currentUser);
+
         Stage stage = new Stage();
         stage.setTitle("Создание сводной ведомости");
         stage.setScene(new Scene(root, 341, 584));
-        stage.showAndWait();
+        stage.show();
+    }
+
+    public void setUser(CurrentUser currentUser) {
+        this.currentUser = currentUser;
     }
 }

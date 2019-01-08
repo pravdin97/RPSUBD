@@ -1,5 +1,8 @@
 package dao;
 
+import entity.CurrentUser;
+import entity.UserPost;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -9,8 +12,8 @@ public class Queries {
 
 
     //FIXME: Вставить в базу данных новуб сводную ведомость
-    public static String setNewCRecord(LocalDate date, String semestr, String faculty, String group) {
-        return  String.format("INSERT INTO warehouses(name,capacity) VALUES(?,?)");
+    public static String setNewCRecord(LocalDate date, int id_group, int id_worker, int id_semestr) {
+        return  String.format("INSERT INTO insert into crecord (date, id_group, id_worker, id_semestr) values ('%s', '%s', '%s', '%s')", date, id_group, id_worker, id_semestr);
     }
 
     /// Получить все направления + номер группы по факультету
@@ -232,5 +235,33 @@ public class Queries {
 
     public static void CreateNewExamPaper() {
 
+    }
+
+    public static String getIDGroup(String faculty, String direction, String group_number) {
+        return String.format("select groupp.id\n" +
+                "from \n" +
+                "groupp, direction, faculty\n" +
+                "where groupp.number = '%s' and\n" +
+                "groupp.id_direction = direction.id and \n" +
+                "faculty.title = '%s' and\n" +
+                "direction.title = '%s'", group_number, faculty, direction);
+    }
+
+    public static String getCurrentWorker(String login, String password) {
+        return String.format("select worker.id as id, \n" +
+                "worker.name as name, \n" +
+                "worker.surname as surname \n" +
+                "from worker where\n" +
+                "worker.login = '%s' and\n" +
+                "worker.pass = '%s'", login, password);
+    }
+
+    public static String getCurrentTeacher(String login, String password) {
+        return String.format("select teacher.id \n" +
+                "teacher.name as name, \n" +
+                "teacher.surname as surname \n" +
+                "from teacher where\n" +
+                "teacher.login = '%s' and\n" +
+                "teacher.pass = '%s'", login, password);
     }
 }

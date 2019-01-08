@@ -1,6 +1,8 @@
 package sample;
 
 import dao.ConsolidatedStatementDao;
+import dao.NewCRecordDao;
+import entity.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,7 +30,9 @@ public class NewCRecord {
     @FXML
     private Button btn_add_new_crecord;
 
-    private String group_id = "";
+    private Integer group_id;
+
+    private CurrentUser currentUser;
 
     @FXML
     public void cb_semestr_show() {
@@ -57,16 +61,29 @@ public class NewCRecord {
 
     }
 
-    //TODO: Получить id для этого надо написать запросы
     @FXML
     public void btn_add_new_crecord() {
         LocalDate localDate = dp_date.getValue();
         String semestr = cb_semestr.getValue();
         String faculty = cb_faculty.getValue();
-        String group = cb_group.getValue();
+        String group_info = cb_group.getValue();
 
-        //group_id = ConsolidatedStatementDao.GetIDGroup(cb_faculty.getValue());
+        String direction = group_info.split("-")[0];
+        String group_number = group_info.split("-")[1];
+        int semestr_number = Integer.parseInt(semestr.split(" ")[0]);
+        System.out.println(direction + "\n" + group_number + "\n" + semestr_number);
 
+        group_id = NewCRecordDao.getIDGroup(faculty, direction, group_number);
+        System.out.println("ID group " + group_id);
+        System.out.println(currentUser.getId());
+
+        //FIXME: Insert не срабатывает
+        NewCRecordDao.setNewCRecord(localDate, group_id, currentUser.getId(), semestr_number);
+
+    }
+
+    public void setUser(CurrentUser currentUser) {
+        this.currentUser = currentUser;
     }
 
 
