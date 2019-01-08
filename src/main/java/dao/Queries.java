@@ -13,7 +13,7 @@ public class Queries {
 
     //FIXME: Вставить в базу данных новуб сводную ведомость
     public static String setNewCRecord(LocalDate date, int id_group, int id_worker, int id_semestr) {
-        return  String.format("INSERT INTO insert into crecord (date, id_group, id_worker, id_semestr) values ('%s', '%s', '%s', '%s')", date, id_group, id_worker, id_semestr);
+        return  String.format("insert into crecord (date, id_group, id_worker, id_semestr) values ('%s', '%s', '%s', '%s')", date, id_group, id_worker, id_semestr);
     }
 
     /// Получить все направления + номер группы по факультету
