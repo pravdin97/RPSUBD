@@ -272,18 +272,22 @@ public class WorkerDepartment implements Initializable {
     private void getInfoAboutAllStudentFromDirection(String direction) throws SQLException {
         tv_student.getItems().clear();
         ArrayList<Student> data = StudentDao.GetAllStudentFromDirectionForTable(direction);
-        for (Student item: data) {
-            studentData.add(new Student(item.getSurname(), item.getName(), item.getMidname()));
-        }
+//        for (Student item: data) {
+////            studentData.add(new Student(item.getSurname(), item.getName(), item.getMidname()));
+//            studentData.add(item);
+//        }
+        studentData.addAll(data);
     }
 
     // Вывод в таблицу всех сводных ведомостей для данного факультета
     private void getAllCRecordFromFaculty(String faculty) throws SQLException {
         tv_crecord.getItems().clear();
         ArrayList<CRecord> data = CRecordDao.getAllCRecordForFaculty(faculty);
-        for (CRecord item: data) {
-            crecordData.add(new CRecord(item.getDate(), item.getGroup(), item.getWorker(), item.getSemestr()));
-        }
+//        for (CRecord item: data) {
+////            crecordData.add(new CRecord(item.getDate(), item.getGroup(), item.getWorker(), item.getSemestr()));
+//            crecordData.add(item);
+//        }
+        crecordData.addAll(data);
     }
 
     // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"
@@ -298,9 +302,11 @@ public class WorkerDepartment implements Initializable {
     private void getAllERecordFromFaculty(String faculty) {
         tv_erecord.getItems().clear();
         ArrayList<ERecord> data = ERecordDao.getAllERecordForFaculty(faculty);
-        for (ERecord item: data) {
-            erecordData.add(new ERecord(item.getStatus(), item.getDate(), item.getGroup(), item.getWorker(), item.getTeacher(), item.getSubject()));
-        }
+//        for (ERecord item: data) {
+////            erecordData.add(new ERecord(item.getStatus(), item.getDate(), item.getGroup(), item.getWorker(), item.getTeacher(), item.getSubject()));
+//            erecordData.add(item);
+//        }
+        erecordData.addAll(data);
     }
 
     // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"

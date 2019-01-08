@@ -12,9 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 
 public class ExamPaperContent {
@@ -44,6 +46,7 @@ public class ExamPaperContent {
 
     public void init() {
         ctable.getColumns().clear();
+        setTypeAndValueForERecord();
         String erecordInfo = ExamPapersDao.getInfo(subject, group);
         if (erecordInfo == null) {
             lb_info.setText("Ведомости с заданными параметрами не найдены");
@@ -53,10 +56,16 @@ public class ExamPaperContent {
         lb_info.setText(erecordInfo);
 
         ArrayList<IERecord> data = ExamPapersDao.getAllRecords(subject, group);
-//        for (IERecord ieRecord : data) {
-//            items.add(ieRecord);
-//        }
-
         items.addAll(data);
+
+        ctable.setItems(items);
+    }
+
+    private void setTypeAndValueForERecord() {
+        studentName.setCellValueFactory(new PropertyValueFactory<IERecord, String>("StudentName"));
+        studentSurname.setCellValueFactory(new PropertyValueFactory<IERecord, String>("StudentSurname"));
+        sRating.setCellValueFactory(new PropertyValueFactory<IERecord, Integer>("SRating"));
+        eRating.setCellValueFactory(new PropertyValueFactory<IERecord, Integer>("ERating"));
+        tRating.setCellValueFactory(new PropertyValueFactory<IERecord, Integer>("TRating"));
     }
 }

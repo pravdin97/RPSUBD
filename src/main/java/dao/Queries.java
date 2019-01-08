@@ -70,7 +70,7 @@ public class Queries {
     // Получить все записи экзаменнационной ведомости для факультета
     public static String getAllFromERecord(String faculty) {
         return String.format("select \tdate, \n" +
-                "\t\t(direction.title || ' ' || groupp.number) as group_name, \n" +
+                "\t\t(direction.title || '-' || groupp.number) as group_name, \n" +
                 "\t\t(worker.surname || ' ' || worker.name || ' ' || worker.midname) as worker_info,\n" +
                 "\t\t(teacher.surname || ' ' || teacher.name || ' ' || teacher.midname) as teacher_info,\n" +
                 "\t\tsubject.title as subject_name,\n" +
@@ -205,7 +205,7 @@ public class Queries {
 
     //Возвращает все записи экзаменационной ведомости
     public static String GetAllExamPaperItems(String subject, String direction, String group) {
-        return "select ierecord.id, erecord.id_student, ierecord.id_erecord, student.surname, student.name, ierecord.srating, ierecord.erating, ierecord.trating \n" +
+        return "select ierecord.id, ierecord.id_student, ierecord.id_erecord, student.surname, student.name, ierecord.srating, ierecord.erating, ierecord.trating \n" +
                 "from ierecord, erecord, groupp, direction, subject, student\n" +
                 "where ierecord.id_student = student.id AND\n" +
                 "ierecord.id_erecord = erecord.id AND\n" +
@@ -213,7 +213,7 @@ public class Queries {
                 "groupp.id_direction = direction.id AND\n" +
                 "erecord.id_subject = subject.id AND\n" +
                 "subject.title = '" + subject + "' AND\n" +
-                "direction.title = ' " + direction + "' AND\n" +
+                "direction.title = '" + direction + "' AND\n" +
                 "groupp.number = '" + group + "'\n";
     }
 
@@ -226,8 +226,8 @@ public class Queries {
                 "erecord.id_teacher = teacher.id AND\n" +
                 "erecord.id_worker = worker.id AND\n" +
                 "subject.title = '" + subject + "' AND\n" +
-                "direction.title = ' " + direction + "' AND\n" +
-                "groupp.number = '" + group + "'\n";
+                "direction.title = '" + direction + "' AND\n" +
+                "groupp.number = '" + group + "'";
     }
 
     public static void CreateNewExamPaper() {
