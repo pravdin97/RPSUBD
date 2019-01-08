@@ -43,12 +43,16 @@ public class ExamPapersDao {
         ResultSet result = DBHelper.ExecuteQuery(Queries.GetExamPaperInfo(subject, direction, group));
         String info = "";
         try {
-            info = "Экзаменационная ведомость группы" + result.getString("direction") + "-" +
+            if (result.next())
+                result.getInt("group");
+            String dir = result.getString("direction");
+
+            info = "Экзаменационная ведомость группы " + result.getString("direction") + "-" +
                     result.getInt("group") + " по дисциплине \"" + result.getString("subject") +
                     "\" была сформирована " + result.getString("workerName") + " " +
                     result.getString("workerSurname") + " " + result.getDate("date");
         } catch (SQLException e) {
-            info = "Такая ведомость еще не сформирована";
+            return null;
         }
         return info;
     }

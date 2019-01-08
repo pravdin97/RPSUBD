@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.istack.internal.NotNull;
 import dao.CRecordDao;
 import dao.ERecordDao;
 import dao.StudentDao;
@@ -156,6 +157,41 @@ public class WorkerDepartment implements Initializable {
             }
             root.getChildren().add(facultyTreeNode);
         }
+
+        //обработка клика на строку, содержащую данные о сводной ведомости
+        tv_crecord.setRowFactory( tv -> {
+            TableRow<CRecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    CRecord rowData = row.getItem();
+
+                    String group = rowData.getGroup();
+                    String semestr = rowData.getSemestr() + " семестр";
+
+                    getConsolidatedStatementContent(group, semestr);
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
+
+        //обработка клика на строку, содержащую данные о экзаменационной ведомости
+        tv_erecord.setRowFactory( tv -> {
+            TableRow<ERecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    ERecord rowData = row.getItem();
+
+                    //тут косяк, Макс поправь
+                    String group = rowData.getGroup();
+                    String subject = rowData.getSubject();
+
+                    getExamPapertContent(group, subject);
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
     }
 
 
@@ -237,18 +273,22 @@ public class WorkerDepartment implements Initializable {
     private void getInfoAboutAllStudentFromDirection(String direction) throws SQLException {
         tv_student.getItems().clear();
         ArrayList<Student> data = StudentDao.GetAllStudentFromDirectionForTable(direction);
-        for (Student item: data) {
-            studentData.add(new Student(item.getSurname(), item.getName(), item.getMidname()));
-        }
+//        for (Student item: data) {
+////            studentData.add(new Student(item.getSurname(), item.getName(), item.getMidname()));
+//            studentData.add(item);
+//        }
+        studentData.addAll(data);
     }
 
     // Вывод в таблицу всех сводных ведомостей для данного факультета
     private void getAllCRecordFromFaculty(String faculty) throws SQLException {
         tv_crecord.getItems().clear();
         ArrayList<CRecord> data = CRecordDao.getAllCRecordForFaculty(faculty);
-        for (CRecord item: data) {
-            crecordData.add(new CRecord(item.getDate(), item.getGroup(), item.getWorker(), item.getSemestr()));
-        }
+//        for (CRecord item: data) {
+////            crecordData.add(new CRecord(item.getDate(), item.getGroup(), item.getWorker(), item.getSemestr()));
+//            crecordData.add(item);
+//        }
+        crecordData.addAll(data);
     }
 
     // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"
@@ -263,9 +303,11 @@ public class WorkerDepartment implements Initializable {
     private void getAllERecordFromFaculty(String faculty) {
         tv_erecord.getItems().clear();
         ArrayList<ERecord> data = ERecordDao.getAllERecordForFaculty(faculty);
-        for (ERecord item: data) {
-            erecordData.add(new ERecord(item.getStatus(), item.getDate(), item.getGroup(), item.getWorker(), item.getTeacher(), item.getSubject()));
-        }
+//        for (ERecord item: data) {
+////            erecordData.add(new ERecord(item.getStatus(), item.getDate(), item.getGroup(), item.getWorker(), item.getTeacher(), item.getSubject()));
+//            erecordData.add(item);
+//        }
+        erecordData.addAll(data);
     }
 
     // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Сводные ведомости"
@@ -278,8 +320,8 @@ public class WorkerDepartment implements Initializable {
         id_status_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, Boolean>("status"));
     }
 
-    @FXML
-    public void getConsolidatedStatementContent() {
+
+    private void getConsolidatedStatementContent(String group, String semestr) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/consolidate2.fxml"));
         Parent root = null;
@@ -289,12 +331,13 @@ public class WorkerDepartment implements Initializable {
             e.printStackTrace();
         }
         ConsolidatedStatementContent controller = loader.getController();
-        controller.setValues("", "", "");
+        controller.setValues(group, semestr);
 
 
         Stage stage = new Stage();
         stage.setTitle("Сводная ведомость");
         stage.setScene(new Scene(root));
+        controller.init();
         stage.show();
     }
 
@@ -319,5 +362,25 @@ public class WorkerDepartment implements Initializable {
 
     public void setUser(CurrentUser currentUser) {
         this.currentUser = currentUser;
+    }
+
+    private void getExamPapertContent(String group, String subject) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/exam_paper.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ExamPaperContent controller = loader.getController();
+        controller.setValues(group, subject);
+
+
+        Stage stage = new Stage();
+        stage.setTitle("Экзаменационная ведомость");
+        stage.setScene(new Scene(root));
+        controller.init();
+        stage.show();
     }
 }

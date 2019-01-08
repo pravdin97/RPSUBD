@@ -21,7 +21,7 @@
                       <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                            <TableView fx:id="tv_crecord" onMouseClicked="#getConsolidatedStatementContent" prefHeight="440.0" prefWidth="903.0">
+                            <TableView fx:id="tv_crecord" prefHeight="440.0" prefWidth="903.0">
                               <columns>
                                 <TableColumn fx:id="id_data_crecord" prefWidth="206.0" text="Дата заполнения" />
                                 <TableColumn fx:id="id_group_crecord" prefWidth="245.0" text="Группа" />
