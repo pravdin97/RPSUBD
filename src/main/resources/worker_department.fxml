@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1240.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.WorkerDepartment">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkerDepartment">
   <children>
     <TreeView fx:id="treev_navigation" onContextMenuRequested="#clickMouse" onMouseClicked="#clickMouse" prefHeight="600.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <TabPane fx:id="tp_navigation" prefHeight="600.0" prefWidth="903.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="335.0">
@@ -23,10 +23,10 @@
                           <children>
                             <TableView fx:id="tv_crecord" prefHeight="440.0" prefWidth="903.0">
                               <columns>
-                                <TableColumn prefWidth="206.0" text="Дата заполнения" fx:id="id_data_crecord" />
-                                <TableColumn prefWidth="245.0" text="Группа" fx:id="id_group_crecord" />
-                                <TableColumn prefWidth="289.0" text="Кем заполнена" fx:id="id_worker_crecord" />
-                                <TableColumn prefWidth="165.0" text="Семестр" fx:id="id_semestr_crecord" />
+                                <TableColumn fx:id="id_data_crecord" prefWidth="206.0" text="Дата заполнения" />
+                                <TableColumn fx:id="id_group_crecord" prefWidth="245.0" text="Группа" />
+                                <TableColumn fx:id="id_worker_crecord" prefWidth="289.0" text="Кем заполнена" />
+                                <TableColumn fx:id="id_semestr_crecord" prefWidth="165.0" text="Семестр" />
                               </columns>
                             </TableView>
                             <Button fx:id="bt_add_crecord" layoutX="508.0" mnemonicParsing="false" onAction="#add_crecord" prefHeight="60.0" prefWidth="240.0" text="Добавить ведомость" AnchorPane.bottomAnchor="27.0" />
@@ -41,12 +41,12 @@
                           <children>
                             <TableView fx:id="tv_erecord" prefHeight="440.0" prefWidth="903.0">
                               <columns>
-                                <TableColumn prefWidth="141.0" text="Дата заполнения" fx:id="id_data_erecord" />
-                                <TableColumn prefWidth="146.0" text="Группа" fx:id="id_group_erecord" />
-                                <TableColumn prefWidth="145.0" text="Кем заполнена" fx:id="id_worker_erecord" />
-                                <TableColumn minWidth="0.0" prefWidth="153.0" text="Преподаватель" fx:id="id_teacher_erecord" />
-                                <TableColumn prefWidth="176.0" text="Предмет" fx:id="id_subject_erecord" />
-                                <TableColumn prefWidth="140.0" text="Статус" fx:id="id_status_erecord" />
+                                <TableColumn fx:id="id_data_erecord" prefWidth="141.0" text="Дата заполнения" />
+                                <TableColumn fx:id="id_group_erecord" prefWidth="146.0" text="Группа" />
+                                <TableColumn fx:id="id_worker_erecord" prefWidth="145.0" text="Кем заполнена" />
+                                <TableColumn fx:id="id_teacher_erecord" minWidth="0.0" prefWidth="153.0" text="Преподаватель" />
+                                <TableColumn fx:id="id_subject_erecord" prefWidth="176.0" text="Предмет" />
+                                <TableColumn fx:id="id_status_erecord" prefWidth="140.0" text="Статус" />
                               </columns>
                             </TableView>
                             <Button fx:id="bt_delete_erecord" layoutX="159.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Удалить ведомость" AnchorPane.bottomAnchor="27.0" />
@@ -67,9 +67,9 @@
               <children>
                 <TableView fx:id="tv_group" prefHeight="442.0" prefWidth="903.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <columns>
-                    <TableColumn prefWidth="324.0" text="Факультет" fx:id="id_faculty" />
-                    <TableColumn minWidth="0.0" prefWidth="378.0" text="Направление" fx:id="id_direction" />
-                    <TableColumn minWidth="0.0" prefWidth="203.0" text="Номер группы" fx:id="id_number" />
+                    <TableColumn fx:id="id_faculty" prefWidth="324.0" text="Факультет" />
+                    <TableColumn fx:id="id_direction" minWidth="0.0" prefWidth="378.0" text="Направление" />
+                    <TableColumn fx:id="id_number" minWidth="0.0" prefWidth="203.0" text="Номер группы" />
                   </columns>
                 </TableView>
                 <Button fx:id="bt_add_group" layoutX="508.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить группу" AnchorPane.bottomAnchor="27.0" />
@@ -84,9 +84,9 @@
               <children>
                 <TableView fx:id="tv_student" prefHeight="923.0" prefWidth="906.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <columns>
-                    <TableColumn prefWidth="291.0" text="Фамилия" fx:id="id_surname" />
-                    <TableColumn prefWidth="260.0" text="Имя" fx:id="id_name" />
-                    <TableColumn prefWidth="354.0" text="Отчество" fx:id="id_midname" />
+                    <TableColumn fx:id="id_surname" prefWidth="291.0" text="Фамилия" />
+                    <TableColumn fx:id="id_name" prefWidth="260.0" text="Имя" />
+                    <TableColumn fx:id="id_midname" prefWidth="354.0" text="Отчество" />
                   </columns>
                 </TableView>
                 <Button fx:id="btn_add_student" layoutX="508.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" text="Добавить студента" AnchorPane.bottomAnchor="27.0" />

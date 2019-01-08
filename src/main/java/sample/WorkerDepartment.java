@@ -222,9 +222,6 @@ public class WorkerDepartment implements Initializable {
                 setTypeAndValueForStudent();
                 tv_student.setItems(studentData);
 
-
-
-
             } else {
                 System.out.println(item.getValue());
                 getInfoAboutAllStudentFromDirection(item.getValue());
@@ -347,9 +344,9 @@ public class WorkerDepartment implements Initializable {
         }
 
         Stage stage = new Stage();
-        stage.setTitle("Сводная ведомость");
-        stage.setScene(new Scene(root));
-        stage.show();
+        stage.setTitle("Создание сводной ведомости");
+        stage.setScene(new Scene(root, 341, 584));
+        stage.showAndWait();
     }
 
     private void getExamPapertContent(String group, String subject) {
