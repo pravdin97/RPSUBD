@@ -18,18 +18,16 @@ public class ConsolidatedStatementContent {
 
     @FXML
     Label lb_info;
-    //endregion
 
-    String faculty, group, semestr;
+    String  group, semestr;
 
-    public void setValues(String faculty, String group, String semestr) {
-        this.faculty = faculty;
+    public void setValues( String group, String semestr) {
         this.group = group;
         this.semestr = semestr;
     }
 
-    @FXML
-    public void bt_action_form() {
+
+    public void init() {
         ctable.getColumns().clear();
         String crecordInfo = ConsolidatedStatementDao.GetCRecordInfo(group, semestr);
         if (crecordInfo == null) {

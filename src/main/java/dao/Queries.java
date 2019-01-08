@@ -46,7 +46,7 @@ public class Queries {
     // Получить все записи сводной ведомости для факультета
     public static String getAllFromCRecord(String faculty) {
         return String.format("select date, " +
-                "(direction.title || ' ' || groupp.number) as group_name, \n" +
+                "(direction.title || '-' || groupp.number) as group_name, \n" +
                 "(worker.surname || ' ' || worker.name || ' ' || worker.midname) as worker_info,\n" +
                 "semestr.number from\n" +
                 "crecord, worker, semestr, groupp, direction, faculty\n" +

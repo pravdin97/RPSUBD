@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.istack.internal.NotNull;
 import dao.CRecordDao;
 import dao.ERecordDao;
 import dao.StudentDao;
@@ -155,6 +156,40 @@ public class WorkerDepartment implements Initializable {
             }
             root.getChildren().add(facultyTreeNode);
         }
+
+        //обработка клика на строку, содержащую данные о сводной ведомости
+        tv_crecord.setRowFactory( tv -> {
+            TableRow<CRecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    CRecord rowData = row.getItem();
+
+                    String group = rowData.getGroup();
+                    String semestr = rowData.getSemestr() + " семестр";
+
+                    getConsolidatedStatementContent(group, semestr);
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
+
+        //обработка клика на строку, содержащую данные о экзаменационной ведомости
+        tv_erecord.setRowFactory( tv -> {
+            TableRow<ERecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    ERecord rowData = row.getItem();
+
+                    String group = rowData.getGroup();
+                    String subject = rowData.getSubject();
+
+                    getExamPapertContent(group, subject);
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
     }
 
 
@@ -280,8 +315,8 @@ public class WorkerDepartment implements Initializable {
         id_status_erecord.setCellValueFactory(new PropertyValueFactory<ERecord, Boolean>("status"));
     }
 
-    @FXML
-    public void getConsolidatedStatementContent() {
+
+    private void getConsolidatedStatementContent(String group, String semestr) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/consolidate2.fxml"));
         Parent root = null;
@@ -291,12 +326,13 @@ public class WorkerDepartment implements Initializable {
             e.printStackTrace();
         }
         ConsolidatedStatementContent controller = loader.getController();
-        controller.setValues("", "", "");
+        controller.setValues(group, semestr);
 
 
         Stage stage = new Stage();
         stage.setTitle("Сводная ведомость");
         stage.setScene(new Scene(root));
+        controller.init();
         stage.show();
     }
 
@@ -313,6 +349,26 @@ public class WorkerDepartment implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Сводная ведомость");
         stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void getExamPapertContent(String group, String subject) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/exam_paper.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ExamPaperContent controller = loader.getController();
+        controller.setValues(group, subject);
+
+
+        Stage stage = new Stage();
+        stage.setTitle("Экзаменационная ведомость");
+        stage.setScene(new Scene(root));
+        controller.init();
         stage.show();
     }
 }
