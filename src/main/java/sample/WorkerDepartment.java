@@ -181,6 +181,7 @@ public class WorkerDepartment implements Initializable {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     ERecord rowData = row.getItem();
 
+                    //тут косяк, Макс поправь
                     String group = rowData.getGroup();
                     String subject = rowData.getSubject();
 
