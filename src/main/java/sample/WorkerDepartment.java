@@ -1,12 +1,10 @@
 package sample;
 
-import com.sun.istack.internal.NotNull;
 import dao.CRecordDao;
 import dao.ERecordDao;
 import dao.StudentDao;
 import dao.WorkerDepartmentDao;
 import entity.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -90,12 +88,6 @@ public class WorkerDepartment implements Initializable {
 
     private ObservableList<CRecord> crecordData = FXCollections.observableArrayList();
 
-    // TODO: Сделать добавление сводной ведомости
-    @FXML
-    private Button bt_add_crecord;
-    @FXML
-    private Button bt_delete_crecord;
-
     // TODO: Экзаменационная
     // Сводная
     @FXML
@@ -136,6 +128,10 @@ public class WorkerDepartment implements Initializable {
 
 
     private CurrentUser currentUser;
+
+    public TableView<CRecord> getTV_crecord() {
+        return tv_crecord;
+    }
 
     // Дерево навигации
     @Override
