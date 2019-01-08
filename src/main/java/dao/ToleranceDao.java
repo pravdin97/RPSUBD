@@ -1,6 +1,7 @@
 package dao;
 
 import utils.DBHelper;
+import utils.Queries;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

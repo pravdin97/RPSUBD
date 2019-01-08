@@ -2,6 +2,7 @@ package dao;
 
 import entity.ScheduleItem;
 import utils.DBHelper;
+import utils.Queries;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

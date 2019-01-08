@@ -244,8 +244,8 @@ public class WorkerDepartment implements Initializable {
 
     // Устанавливаем тип и значение которое должно хранится в колонке таблицы "Студент"
     private void setTypeAndValueForStudent() {
-        id_name.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         id_surname.setCellValueFactory(new PropertyValueFactory<Student, String>("surname"));
+        id_name.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         id_midname.setCellValueFactory(new PropertyValueFactory<Student, String>("midname"));
 
     }
@@ -375,7 +375,6 @@ public class WorkerDepartment implements Initializable {
         }
         ExamPaperContent controller = loader.getController();
         controller.setValues(group, subject);
-
 
         Stage stage = new Stage();
         stage.setTitle("Экзаменационная ведомость");

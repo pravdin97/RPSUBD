@@ -17,6 +17,7 @@ import static dao.LoginDao.CheckLogin;
 import static dao.LoginDao.GetFIO;
 
 public class Login {
+
     UserPost post;
     //region Def
     @FXML

@@ -3,8 +3,8 @@ package dao;
 import entity.CurrentUser;
 import entity.UserPost;
 import utils.DBHelper;
+import utils.Queries;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.ResultSet;
 
 public class LoginDao {

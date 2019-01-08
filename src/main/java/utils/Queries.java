@@ -1,7 +1,4 @@
-package dao;
-
-import entity.CurrentUser;
-import entity.UserPost;
+package utils;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,7 +10,7 @@ public class Queries {
 
     //FIXME: Вставить в базу данных новуб сводную ведомость
     public static String setNewCRecord(LocalDate date, int id_group, int id_worker, int id_semestr) {
-        return  String.format("insert into crecord (date, id_group, id_worker, id_semestr) values ('%s', '%s', '%s', '%s')", date, id_group, id_worker, id_semestr);
+        return String.format("insert into crecord (date, id_group, id_worker, id_semestr) values ('%s', '%s', '%s', '%s')", date, id_group, id_worker, id_semestr);
     }
 
     /// Получить все направления + номер группы по факультету
@@ -48,7 +45,7 @@ public class Queries {
     // Получить напрваление с номером(группу) из факультета
     public static String GetFacultyAndDirectionWithNumber(String faculty) {
         return String.format("select faculty.title, direction.title, groupp.number from direction, faculty, groupp where " +
-                "faculty.id = direction.id_faculty and "+
+                "faculty.id = direction.id_faculty and " +
                 "direction.id = groupp.id_direction and " +
                 "faculty.title = '%s'", faculty);
     }
