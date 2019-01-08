@@ -1,10 +1,17 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Queries {
     /// Получить все названия факультетов
     public static final String GET_TITLE_FROM_FACULTY = "select faculty.title from faculty";
+
+
+    //FIXME: Вставить в базу данных новуб сводную ведомость
+    public static String setNewCRecord(LocalDate date, String semestr, String faculty, String group) {
+        return  String.format("INSERT INTO warehouses(name,capacity) VALUES(?,?)");
+    }
 
     /// Получить все направления + номер группы по факультету
     public static String GetTitleNumberFromFacultyDirection(String faculty) {
